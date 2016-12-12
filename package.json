@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/sheidaei/powerfulquestion/issues"
   },
-  "homepage": "https://github.com/sheidaei/powerfulquestion#readme"
+  "homepage": "https://github.com/sheidaei/powerfulquestion#readme",
+  "dependencies": {
+    "express": "latest",
+    "require": "latest"
+  }
 }
