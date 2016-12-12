@@ -3,7 +3,7 @@ var app=express();
 var port = process.env.PORT || 3000
 
 app.get('/', function (req, res) {
-    getRandomLine( 'listofquestions.txt', function ( line ) { res.send( line ); } );
+    getRandomLine( 'listofquestions.txt', function ( line ) { res.send( `<p style='font-size:4em'>${line}</p>` ); } );
 })
 /*--------------------Routing Over----------------------------*/
 
