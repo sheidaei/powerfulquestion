@@ -9,8 +9,8 @@ app.use(express.static('public'))
 
 
 app.get('/', function (req, res) {
-	var randomline =  Math.floor(Math.random() * listofquestions.length) + 1 ;
-	res.render('index', { color: Math.floor(Math.random()*16777215).toString(16), title: 'It all starts with a Question, a Powerful one!', message: `${listofquestions[randomline]}` });
+	var randomline =  Math.floor(Math.random() * listofquestions.length);
+	res.render('index', { color: Math.floor(Math.random()*16777215).toString(16), title: 'It All Starts With a Question, a Powerful One!', message: `${listofquestions[randomline]}`, questionnumber: randomline});
 });
 
 /*--------------------Routing Over----------------------------*/
