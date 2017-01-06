@@ -14,6 +14,12 @@ app.get('/', function (req, res) {
 	res.render('index', { color: Math.floor(Math.random()*16777215).toString(16), title: 'It All Starts With a Question, a Powerful One!', message: `${listofquestions[randomline]}`, questionnumber: randomline, totalnumberofquestions: numberofquestions});
 });
 
+app.get('/question/:id', function (req, res) {
+	var numberofquestions = listofquestions.length;
+	var randomline =  req.params.id;
+	res.render('index', { color: Math.floor(Math.random()*16777215).toString(16), title: 'It All Starts With a Question, a Powerful One!', message: `${listofquestions[randomline]}`, questionnumber: randomline, totalnumberofquestions: numberofquestions});
+});
+
 /*--------------------Routing Over----------------------------*/
 
 app.listen(port, function () {
