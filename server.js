@@ -28,13 +28,11 @@ function getRandomQuestionNumber(numberofquestions)
 function getColor(colorNumber)
 {
 	return getRandColor(5, +colorNumber);
-	//return Math.floor(colorNumber*16777215).toString(16);
 }
 
 function getRandomColor()
 {
 	return getRandColor(4, Math.random());
-	//return Math.floor(colorNumber*16777215).toString(16);
 }
 
 function getRandColor(brightness, colorNumber){
