@@ -22,7 +22,7 @@ app.get('/question/:id', function (req, res) {
 
 function getRandomQuestionNumber(numberofquestions)
 {
-	return Math.floor(Math.random() * numberofquestions);
+	return Math.floor(Math.random() * numberofquestions)+1;
 }
 
 function getColor(colorNumber)
