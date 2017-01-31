@@ -3,7 +3,8 @@ var app = express();
 var port = process.env.PORT || 3000;
 var listofquestions = require('./public/resources/listofquestions.js');
 var numberofquestions = listofquestions.length;
-
+var DBURL = process.env.DATABASE_URL || 'postgres://zynfjepprwrswo:5b7fd1378c78360943bd3f6f210590975c63acc0a55176715e7bbbeeb6294c9b@ec2-23-23-225-116.compute-1.amazonaws.com:5432/d3f7gsu5qfgo3v'
+var pg = require('pg');
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -19,6 +20,52 @@ app.get('/question/:id', function (req, res) {
 	var questionNumber =  req.params.id;
 	res.render('question', { color: getColor(questionNumber/numberofquestions), title: getTitle(), message: `${listofquestions[questionNumber-1]}`, questionnumber:  questionNumber, totalnumberofquestions: numberofquestions});
 });
+
+
+app.get('/db2', function (request, response) {
+  pg.connect(DBURL, function(err, client, done) {
+    client.query('SELECT * FROM test_table', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
+});
+
+app.get('/db', function (req, res) {
+
+pg.defaults.ssl = true;
+/*pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
+*/
+var connectionString = "postgres://zynfjepprwrswo:5b7fd1378c78360943bd3f6f210590975c63acc0a55176715e7bbbeeb6294c9b@ec2-23-23-225-116.compute-1.amazonaws.com:5432:/d3f7gsu5qfgo3v"
+//var connectionString = "postgres://*USERNAME*:*PASSWORD*@*HOST*:*PORT:/*DATABASE*"
+
+pg.connect(connectionString, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+   });
+});
+
+
+});
+
+
 
 function getRandomQuestionNumber(numberofquestions)
 {
